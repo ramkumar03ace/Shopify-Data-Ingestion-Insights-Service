@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id          String   @id @default(uuid())
+  name        String
+  shopifyUrl  String   @unique
+  accessToken String
+  email       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  customers Customer[]
+  products  Product[]
+  orders    Order[]
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  shopifyId String
+  email     String?
+  firstName String?
+  lastName  String?
+  totalSpent Decimal  @default(0.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  orders    Order[]
+
+  @@unique([shopifyId, tenantId])
+}
+
+model Product {
+  id        String   @id @default(uuid())
+  shopifyId String
+  title     String
+  price     Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  @@unique([shopifyId, tenantId])
+}
+
+model Order {
+  id         String   @id @default(uuid())
+  shopifyId  String
+  totalPrice Decimal
+  currency   String   @default("USD")
+  createdAt  DateTime @default(now())
+  processedAt DateTime?
+  
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id])
+
+  @@unique([shopifyId, tenantId])
+}
