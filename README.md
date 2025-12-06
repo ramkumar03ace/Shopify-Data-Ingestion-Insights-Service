@@ -4,7 +4,7 @@ A multi-tenant Shopify Data Ingestion & Insights Service that simulates how Xeno
 
 ## Table of Contents
 - [Architecture](#architecture)
-- [Deployment Guide](./DEPLOYMENT.md)
+
 - [Prerequisites](#prerequisites)
 - [Installation & Setup](#installation--setup)
 - [API Endpoints](#api-endpoints)
