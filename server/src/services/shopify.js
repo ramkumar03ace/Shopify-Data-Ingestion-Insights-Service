@@ -1,6 +1,5 @@
 const axios = require('axios');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../lib/prisma');
 
 class ShopifyService {
     constructor(shopUrl, accessToken) {
@@ -115,7 +114,6 @@ class ShopifyService {
                     currency: order.currency,
                     processedAt: order.processed_at ? new Date(order.processed_at) : null,
                     customerId,
-                    updatedAt: new Date(),
                 },
                 create: {
                     shopifyId: String(order.id),

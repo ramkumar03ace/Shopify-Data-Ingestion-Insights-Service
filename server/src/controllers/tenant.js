@@ -1,5 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../lib/prisma');
 
 exports.createTenant = async (req, res) => {
     try {
@@ -34,6 +33,7 @@ exports.getTenants = async (req, res) => {
         const tenants = await prisma.tenant.findMany();
         res.json(tenants);
     } catch (error) {
+        console.error('Failed to fetch tenants:', error);
         res.status(500).json({ error: 'Failed to fetch tenants' });
     }
 };

@@ -15,5 +15,6 @@ const analyticsController = require('../controllers/analytics');
 router.get('/analytics/stats', analyticsController.getStats);
 router.get('/analytics/orders-by-date', analyticsController.getOrdersByDate);
 router.get('/analytics/top-customers', analyticsController.getTopCustomers);
+router.get('/analytics/customers-over-time', analyticsController.getCustomersOverTime);
 
 module.exports = router;

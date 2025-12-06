@@ -1,10 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
-require('dotenv').config();
+const prisma = require('./lib/prisma');
 
 const app = express();
-const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
