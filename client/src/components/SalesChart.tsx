@@ -38,11 +38,11 @@ export function SalesChart({ data }: SalesChartProps) {
                     tick={{ fontSize: 12 }}
                     tickLine={false}
                     axisLine={false}
-                    tickFormatter={(value) => `$${value}`}
+                    tickFormatter={(value) => `₹${value}`}
                 />
                 <Tooltip
                     contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                    formatter={(value: number) => [`$${value}`, 'Sales']}
+                    formatter={(value: number) => [`₹${value}`, 'Sales']}
                 />
                 <Line
                     type="monotone"
